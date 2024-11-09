@@ -25,7 +25,7 @@ def create_plot(start_year, end_year):
     )
 
     layout = go.Layout(
-        title=f'Global Mean Sea Level Variations ({start_year} - {end_year})',
+        title=f'Global Mean Sea Level Change ({start_year} - {end_year})',
         xaxis=dict(title='Year (Fraction)'),
         yaxis=dict(title='Global Mean Sea Level (mm)'),
         plot_bgcolor='white',
