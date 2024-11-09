@@ -6,33 +6,72 @@
     <title>Global Mean Sea Level Visualization</title>
     <style>
         body {
-            background-color: white;
-            font-family: Arial, sans-serif;
+            background-color: #e6f7ff; /* 浅蓝色背景 */
+            font-family: 'Arial', sans-serif;
             margin: 0;
             padding: 20px;
+            color: #333; /* 深色文字，提升可读性 */
         }
 
         h1 {
-            color: #333;
-        }
-
-        div {
-            margin-top: 20px;
-        }
-
-        form {
+            text-align: center;
+            color: #2a6d92; /* 深蓝色标题 */
+            font-size: 28px;
             margin-bottom: 30px;
         }
 
+        form {
+            background-color: #ffffff; /* 白色表单背景 */
+            padding: 20px;
+            border-radius: 8px; /* 圆角效果 */
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* 轻微阴影效果 */
+            max-width: 500px;
+            margin: 0 auto 30px auto; /* 居中表单 */
+        }
+
+        label {
+            font-size: 16px;
+            margin-right: 10px;
+        }
+
         input {
-            padding: 5px;
+            padding: 8px;
             font-size: 14px;
+            margin: 5px 0 15px 0;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            width: 100%;
+            box-sizing: border-box;
+        }
+
+        .button-container {
+            display: flex;
+            justify-content: center; /* 水平居中 */
+            margin-top: 15px;
         }
 
         button {
-            padding: 6px 10px;
-            font-size: 14px;
+            background-color: #2a6d92; /* 深蓝色按钮 */
+            color: white;
+            padding: 10px 20px;
+            font-size: 16px;
+            border: none;
+            border-radius: 4px;
             cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+        button:hover {
+            background-color: #1f5c7b; /* 鼠标悬停时变深 */
+        }
+
+        div {
+            text-align: center;
+        }
+
+        /* 图表容器 */
+        .graph-container {
+            margin-top: 40px;
         }
     </style>
 </head>
@@ -40,16 +79,19 @@
     <h1>Global Mean Sea Level Variations</h1>
 
     <!-- 表单让用户输入年份 -->
-    <!-- 将 action 从 "/sea_level_visualize_route" 改为 "/sea_level_visualize" -->
     <form action="/sea_level_visualize" method="post">
         <label for="start_year">Start Year: </label>
         <input type="number" id="start_year" name="start_year" required>
         <label for="end_year">End Year: </label>
         <input type="number" id="end_year" name="end_year" required>
-        <button type="submit">Generate Graph</button>
+
+        <!-- 包裹按钮的 div，确保按钮居中 -->
+        <div class="button-container">
+            <button type="submit">Generate Graph</button>
+        </div>
     </form>
 
-    <div>
+    <div class="graph-container">
         <!-- 在这里嵌入 Plotly 图表 -->
         {{ graph_html | safe }}
     </div>
