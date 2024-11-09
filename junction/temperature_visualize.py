@@ -107,5 +107,7 @@ def temperature_visualize_route():
 
     return render_template('temperature_visualize.html')  # 显示表单页面
 
+
+
 if __name__ == '__main__':
     app.run(debug=True)
