@@ -80,15 +80,16 @@
 
     <!-- 表单让用户输入年份 -->
     <form action="/sea_level_visualize" method="post">
-    <label for="start_year">Start Year: </label>
-    <input type="number" id="start_year" name="start_year" min="1993" max="2024" required>
+        <label for="start_year">Start Year: </label>
+        <input type="number" id="start_year" name="start_year" min="1993" max="2024" required>
 
-    <label for="end_year">End Year: </label>
-    <input type="number" id="end_year" name="end_year" min="1993" max="2024" required>
+        <label for="end_year">End Year: </label>
+        <input type="number" id="end_year" name="end_year" min="1993" max="2024" required>
 
-    <button type="submit">Generate Graph</button>
-</form>
-
+        <div class="button-container">
+            <button type="submit">Generate Graph</button>
+        </div>
+    </form>
 
     <div class="graph-container">
         <!-- 在这里嵌入 Plotly 图表 -->
@@ -96,3 +97,4 @@
     </div>
 </body>
 </html>
+
