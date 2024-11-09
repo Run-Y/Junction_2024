@@ -63,6 +63,7 @@
             background-color: #007bff;
             border-radius: 4px;
             transition: background-color 0.3s, transform 0.3s;
+            cursor: pointer;
         }
 
         /* 链接按钮的悬停效果 */
@@ -105,16 +106,27 @@
         }
 
         /* 建议按钮样式 */
-        .advice-button {
-            margin-top: 30px;
+        .info-button, .advice-button {
+            margin-top: 20px;
             padding: 10px 25px;
             font-size: 1.1em;
             color: #ffffff;
-            background-color: #ff9800;
             border: none;
             border-radius: 4px;
             cursor: pointer;
             transition: background-color 0.3s;
+        }
+
+        .info-button {
+            background-color: #4caf50;
+        }
+
+        .info-button:hover {
+            background-color: #45a049;
+        }
+
+        .advice-button {
+            background-color: #ff9800;
         }
 
         .advice-button:hover {
@@ -182,21 +194,57 @@
     <div class="container">
         <h2>Climate Data Options</h2>
         <ul>
-            <!-- 修改了 Global Temperature Change 的链接，指向 temperature_visualize -->
             <li class="temperature"><a href="/temperature_visualize" target="_blank">Global Temperature Change</a></li>
-            <li class="co2"><a href="/plot/co2" target="_blank">CO2 Emissions</a></li>
-            <li class="sea_level"><a href="/plot/sea_level" target="_blank">Sea Level Rise</a></li>
-            <li class="ice_mass_loss"><a href="/plot/ice_mass_loss" target="_blank">Glacier Ice Mass Loss</a></li>
+            <li class="co2"><a onclick="openModal('co2Modal')">CO2 Emissions</a></li>
+            <li class="sea_level"><a onclick="openModal('seaLevelModal')">Sea Level Rise</a></li>
+            <li class="ice_mass_loss"><a onclick="openModal('iceMassLossModal')">Glacier Ice Mass Loss</a></li>
         </ul>
 
+        <!-- 信息按钮 -->
+        <button class="info-button" onclick="openModal('infoModal')">Space Data & Climate Change</button>
+
         <!-- 建议按钮 -->
-        <button class="advice-button" onclick="openModal()">View recommendations</button>
+        <button class="advice-button" onclick="openModal('adviceModal')">View recommendations</button>
     </div>
 
-    <!-- 模态窗口 -->
+    <!-- 各个主题的模态窗口 -->
+    <div id="co2Modal" class="modal">
+        <div class="modal-content">
+            <span class="close" onclick="closeModal('co2Modal')">&times;</span>
+            <h2>CO2 Emissions</h2>
+            <p>CO2 emissions are a primary contributor to global warming, mainly resulting from the burning of fossil fuels. Monitoring CO2 levels is essential to understanding and mitigating climate change.</p>
+        </div>
+    </div>
+
+    <div id="seaLevelModal" class="modal">
+        <div class="modal-content">
+            <span class="close" onclick="closeModal('seaLevelModal')">&times;</span>
+            <h2>Sea Level Rise</h2>
+            <p>Sea level rise is caused by melting glaciers and thermal expansion of seawater due to global warming. This poses a significant threat to coastal regions and island nations.</p>
+        </div>
+    </div>
+
+    <div id="iceMassLossModal" class="modal">
+        <div class="modal-content">
+            <span class="close" onclick="closeModal('iceMassLossModal')">&times;</span>
+            <h2>Glacier Ice Mass Loss</h2>
+            <p>Glacier ice mass loss is a clear indicator of climate change, driven by rising global temperatures. The melting of glaciers contributes to sea level rise and affects freshwater supplies.</p>
+        </div>
+    </div>
+
+    <!-- 介绍模态窗口 -->
+    <div id="infoModal" class="modal">
+        <div class="modal-content">
+            <span class="close" onclick="closeModal('infoModal')">&times;</span>
+            <h2>Space Data & Climate Change</h2>
+            <p>Satellite data plays a critical role in understanding climate change. Observing Earth from space enables scientists to monitor global temperature changes, CO2 emissions, ice mass loss, and sea level rise with unprecedented accuracy. These insights allow us to track long-term climate trends, make predictions, and evaluate the effectiveness of climate action initiatives.</p>
+        </div>
+    </div>
+
+    <!-- 建议模态窗口 -->
     <div id="adviceModal" class="modal">
         <div class="modal-content">
-            <span class="close" onclick="closeModal()">&times;</span>
+            <span class="close" onclick="closeModal('adviceModal')">&times;</span>
             <h2>Recommendations for addressing climate change</h2>
             <p>Climate change is one of the most pressing challenges we face today. Global warming, rising sea levels, and an increase in extreme weather events pose threats to human life and ecosystems. Here are some action suggestions to support the United Nations Sustainable Development Goal (SDG 13: Climate Action):</p>
             <ul>
@@ -210,8 +258,6 @@
         </div>
     </div>
 
-
-    <!-- 页脚友情链接 -->
     <footer>
         Want to learn more about the Sustainable Development Goals? Visit
         <a href="https://sdgs.un.org/goals" target="_blank">United Nations Sustainable Development Goals</a>。
@@ -219,22 +265,26 @@
 
     <script>
         // 打开模态窗口
-        function openModal() {
-            document.getElementById("adviceModal").style.display = "block";
+        function openModal(modalId) {
+            document.getElementById(modalId).style.display = "block";
         }
 
         // 关闭模态窗口
-        function closeModal() {
-            document.getElementById("adviceModal").style.display = "none";
+        function closeModal(modalId) {
+            document.getElementById(modalId).style.display = "none";
         }
 
         // 点击模态外部区域时关闭窗口
         window.onclick = function(event) {
-            const modal = document.getElementById("adviceModal");
-            if (event.target === modal) {
-                modal.style.display = "none";
-            }
+            const modals = document.querySelectorAll('.modal');
+            modals.forEach(modal => {
+                if (event.target === modal) {
+                    modal.style.display = "none";
+                }
+            });
         }
     </script>
 </body>
 </html>
+
+
