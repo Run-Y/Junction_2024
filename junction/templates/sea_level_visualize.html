@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Global Mean Sea Level Visualization</title>
+    <style>
+        body {
+            background-color: white;
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 20px;
+        }
+
+        h1 {
+            color: #333;
+        }
+
+        div {
+            margin-top: 20px;
+        }
+
+        form {
+            margin-bottom: 30px;
+        }
+
+        input {
+            padding: 5px;
+            font-size: 14px;
+        }
+
+        button {
+            padding: 6px 10px;
+            font-size: 14px;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+    <h1>Global Mean Sea Level Variations</h1>
+
+    <!-- 表单让用户输入年份 -->
+    <!-- 将 action 从 "/sea_level_visualize_route" 改为 "/sea_level_visualize" -->
+    <form action="/sea_level_visualize" method="post">
+        <label for="start_year">Start Year: </label>
+        <input type="number" id="start_year" name="start_year" required>
+        <label for="end_year">End Year: </label>
+        <input type="number" id="end_year" name="end_year" required>
+        <button type="submit">Generate Graph</button>
+    </form>
+
+    <div>
+        <!-- 在这里嵌入 Plotly 图表 -->
+        {{ graph_html | safe }}
+    </div>
+</body>
+</html>
