@@ -1,5 +1,4 @@
-import os
-from flask import Flask, render_template, request, send_from_directory, redirect, url_for
+from flask import Flask, render_template, request, send_file, redirect, url_for
 import requests
 import matplotlib.pyplot as plt
 from datetime import datetime
@@ -8,9 +7,6 @@ import io
 import logging
 
 app = Flask(__name__)
-
-# 图片保存的目录
-app.config['UPLOAD_FOLDER'] = 'static/images'
 
 # 获取NASA Power数据的函数
 def get_nasa_power_data(latitude, longitude, start_date, end_date):
@@ -21,18 +17,17 @@ def get_nasa_power_data(latitude, longitude, start_date, end_date):
         "start": start_date,
         "end": end_date,
         "community": "RE",
-        "parameters": "ALLSKY_SFC_SW_DWN,WS10M,WS50M,T2M,PRECTOTCORR",  # 要获取的参数
+        "parameters": "ALLSKY_SFC_SW_DWN,WS10M,WS50M,T2M,PRECTOTCORR",
         "format": "JSON",
     }
     try:
         response = requests.get(url, params=params)
-        response.raise_for_status()  # 如果请求失败，将抛出异常
+        response.raise_for_status()
         data = response.json()
         return data["properties"]["parameter"]
     except requests.exceptions.RequestException as e:
         logging.error(f"请求失败: {e}")
         return None
-
 
 # 绘制天气数据的函数
 def plot_weather_data(start_year, end_year, latitude, longitude):
@@ -47,7 +42,7 @@ def plot_weather_data(start_year, end_year, latitude, longitude):
             plt.subplot(2, 3, i + 1)
             monthly_values = {year: {month: [] for month in range(1, 13)} for year in years}
 
-            for j, year in enumerate(years):
+            for year in years:
                 start_date = f"{year}0101"
                 end_date = f"{year}1231"
                 data = get_nasa_power_data(latitude, longitude, start_date, end_date)
@@ -62,11 +57,13 @@ def plot_weather_data(start_year, end_year, latitude, longitude):
 
             avg_monthly_values = {}
             for year in years:
-                avg_monthly_values[year] = [np.mean(monthly_values[year][month]) if monthly_values[year][month] else 0 for
-                                            month in range(1, 13)]
+                avg_monthly_values[year] = [
+                    np.mean(monthly_values[year][month]) if monthly_values[year][month] else 0
+                    for month in range(1, 13)
+                ]
 
-            for j, year in enumerate(years):
-                plt.plot(range(1, 13), avg_monthly_values[year], label=str(year), color=colors[j])
+            for year in years:
+                plt.plot(range(1, 13), avg_monthly_values[year], label=str(year), color=colors[years.index(year)])
 
             plt.title(f"{param} Monthly Comparison")
             plt.xlabel("Month")
@@ -76,28 +73,20 @@ def plot_weather_data(start_year, end_year, latitude, longitude):
 
         plt.tight_layout()
 
-        # 将图像保存在静态文件夹中并返回文件名
-        img_filename = f"plot_{latitude}_{longitude}_{start_year}_{end_year}.png"
-        img_path = os.path.join(app.config['UPLOAD_FOLDER'], img_filename)
+        # 将图像保存到内存并返回
         img = io.BytesIO()
         plt.savefig(img, format='png')
         img.seek(0)
         plt.close()
-
-        with open(img_path, 'wb') as f:
-            f.write(img.read())
-
-        return img_filename
+        return img
     except Exception as e:
         logging.error(f"绘制图表时发生错误: {e}")
         return None
 
-
 # 根路由
 @app.route('/')
 def home():
-    return "<h1>Welcome to the Temperature Visualization App</h1>"  # 或者渲染一个HTML模板
-
+    return redirect(url_for('temperature_visualize'))  # 重定向到 /temperature_visualize 路由
 
 # 路由: 获取数据并显示图表
 @app.route('/temperature_visualize', methods=['GET', 'POST'])
@@ -110,14 +99,13 @@ def temperature_visualize():
 
         # 调用绘图功能
         img = plot_weather_data(start_year, end_year, latitude, longitude)
-        return send_file(img, mimetype='image/png')  # 将图片返回给浏览器
+        if img:
+            # 将生成的图像直接发送到浏览器
+            return send_file(img, mimetype='image/png')
+        else:
+            return "<h1>Error in generating plot</h1>"
 
     return render_template('temperature_visualize.html')  # 显示表单页面
-
-
-if __name__ == '__main__':
-    app.run(debug=True)
-
 
 if __name__ == '__main__':
     app.run(debug=True)
