@@ -3,6 +3,7 @@ from flask import Flask, render_template, send_file, request
 import sea_level_visulize as slv_module
 import temperature_visualize as tv_module  # 导入 Temperature_Visualize.py 中的功能
 import ice_sheets_visualize as isv_module
+import carbon_dioxide_visualize as cdv_module
 
 app = Flask(__name__)
 
@@ -80,6 +81,29 @@ def ice_sheets_visualize():
 
     # GET 请求显示表单页面
     return render_template('ice_sheets_visualize.html')
+
+@app.route('/carbon_dioxide_visualize', methods=['GET', 'POST'])
+def carbon_dioxide_visualize():
+    if request.method == 'POST':
+        # 获取表单输入的年份
+        start_year = request.form.get('start_year', type=int)
+        end_year = request.form.get('end_year', type=int)
+
+        # 额外的年份范围检查
+        if start_year < 1958 or end_year > 2024:
+            return "<h1>Please enter a valid year between 1958 and 2024。</h1>"
+
+        if start_year and end_year:
+            # 生成图表
+            figure = cdv_module.create_plot(start_year, end_year)
+            graph_html = figure.to_html(full_html=False)
+            return render_template('carbon_dioxide_visualize.html', graph_html=graph_html)
+        else:
+            return "<h1>Please enter a valid year.</h1>"
+
+    # GET 请求显示表单页面
+    return render_template('carbon_dioxide_visualize.html')
+
 
 if __name__ == '__main__':
     app.run(debug=True)

@@ -195,7 +195,7 @@
         <h2>Climate Data Options</h2>
         <ul>
             <li class="temperature"><a href="/temperature_visualize" target="_blank">Global Temperature Change</a></li>
-            <li class="co2"><a onclick="openModal('co2Modal')">CO2 Emissions</a></li>
+            <li class="co2"><a href="/carbon_dioxide_visualize" target="_blank">CO₂ Emissions</a></li>
             <li class="sea_level"><a href="/sea_level_visualize" target="_blank">Sea Level Change</a></li>
             <li class="ice_mass_loss"><a href="/ice_sheets_visualize" target="_blank">Glacier Ice Mass Loss</a></li>
         </ul>
@@ -207,30 +207,6 @@
         <button class="advice-button" onclick="openModal('adviceModal')">View recommendations</button>
     </div>
 
-    <!-- 各个主题的模态窗口 -->
-    <div id="co2Modal" class="modal">
-        <div class="modal-content">
-            <span class="close" onclick="closeModal('co2Modal')">&times;</span>
-            <h2>CO2 Emissions</h2>
-            <p>CO2 emissions are a primary contributor to global warming, mainly resulting from the burning of fossil fuels. Monitoring CO2 levels is essential to understanding and mitigating climate change.</p>
-        </div>
-    </div>
-
-    <div id="seaLevelModal" class="modal">
-        <div class="modal-content">
-            <span class="close" onclick="closeModal('seaLevelModal')">&times;</span>
-            <h2>Sea Level Rise</h2>
-            <p>Sea level rise is caused by melting glaciers and thermal expansion of seawater due to global warming. This poses a significant threat to coastal regions and island nations.</p>
-        </div>
-    </div>
-
-    <div id="iceMassLossModal" class="modal">
-        <div class="modal-content">
-            <span class="close" onclick="closeModal('iceMassLossModal')">&times;</span>
-            <h2>Glacier Ice Mass Loss</h2>
-            <p>Glacier ice mass loss is a clear indicator of climate change, driven by rising global temperatures. The melting of glaciers contributes to sea level rise and affects freshwater supplies.</p>
-        </div>
-    </div>
 
     <!-- 介绍模态窗口 -->
     <div id="infoModal" class="modal">
