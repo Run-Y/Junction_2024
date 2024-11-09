@@ -35,9 +35,13 @@ def temperature_visualize():
 @app.route('/sea_level_visualize', methods=['GET', 'POST'])
 def sea_level_visualize():
     if request.method == 'POST':
-        # 获取表单输入
+        # 获取表单输入的年份
         start_year = request.form.get('start_year', type=int)
         end_year = request.form.get('end_year', type=int)
+
+        # 额外的年份范围检查
+        if start_year < 1993 or end_year > 2024:
+            return "<h1>Please enter a valid year between 1993 and 2024。</h1>"
 
         if start_year and end_year:
             # 生成图表
@@ -45,10 +49,11 @@ def sea_level_visualize():
             graph_html = figure.to_html(full_html=False)
             return render_template('sea_level_visualize.html', graph_html=graph_html)
         else:
-            return "<h1>请输入有效的年份</h1>"
+            return "<h1>Please enter a valid year.</h1>"
 
     # GET 请求显示表单页面
     return render_template('sea_level_visualize.html')
+
 
 
 
