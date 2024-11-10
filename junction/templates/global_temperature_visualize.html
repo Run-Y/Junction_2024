@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Global Temperature Anomalies Over Time</title>
+    <style>
+        body {
+            background-color: #e6f7ff; /* 浅蓝色背景 */
+            font-family: 'Arial', sans-serif;
+            margin: 0;
+            padding: 20px;
+            color: #333; /* 深色文字，提升可读性 */
+        }
+
+        h1 {
+            text-align: center;
+            color: #2a6d92; /* 深蓝色标题 */
+            font-size: 28px;
+            margin-bottom: 30px;
+        }
+
+        form {
+            background-color: #ffffff; /* 白色表单背景 */
+            padding: 20px;
+            border-radius: 8px; /* 圆角效果 */
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* 轻微阴影效果 */
+            max-width: 500px;
+            margin: 0 auto 30px auto; /* 居中表单 */
+        }
+
+        label {
+            font-size: 16px;
+            margin-right: 10px;
+        }
+
+        input {
+            padding: 8px;
+            font-size: 14px;
+            margin: 5px 0 15px 0;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            width: 100%;
+            box-sizing: border-box;
+        }
+
+        .button-container {
+            display: flex;
+            justify-content: center; /* 水平居中 */
+            margin-top: 15px;
+        }
+
+        button {
+            background-color: #2a6d92; /* 深蓝色按钮 */
+            color: white;
+            padding: 10px 20px;
+            font-size: 16px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+        button:hover {
+            background-color: #1f5c7b; /* 鼠标悬停时变深 */
+        }
+
+        .graph-container {
+            margin-top: 40px;
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+    <h1>Global Temperature Change</h1>
+
+    <!-- 表单让用户输入开始和结束年份 -->
+  <form action="/global_temperature_visualize" method="post">
+        <label for="start_year">Start Year: </label>
+        <input type="number" id="start_year" name="start_year" value="{{ start_year }}" min="1880" max="2023" required>
+
+        <label for="end_year">End Year: </label>
+        <input type="number" id="end_year" name="end_year" value="{{ end_year }}" min="1880" max="2023" required>
+
+        <div class="button-container">
+            <button type="submit">Generate Graph</button>
+        </div>
+    </form>
+
+    <div class="graph-container">
+        <!-- 嵌入 Plotly 图表 -->
+        {{ graph_html | safe }}
+    </div>
+</body>
+</html>
