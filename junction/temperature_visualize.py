@@ -6,23 +6,20 @@ import matplotlib.pyplot as plt
 from datetime import datetime
 import numpy as np
 import io
-from dotenv import load_dotenv
-import os
+import logging
+
+app = Flask(__name__)
+
 # 获取城市经纬度的函数
 # 调用 Nominatim API 获取城市的经纬度
 import requests
 import logging
 
-app = Flask(__name__)
-# 加载 .env 文件
-load_dotenv()
-
-# 获取 API 密钥
-Key = os.getenv('Key')
 
 def get_lat_lng_from_city(city_name):
     try:
         # 使用你的 Google API 密钥
+        Key = "AIzaSyBXO0ZpOUkaZgotj3UxCkK3E7xbBDZD9Hw"
         # 构建API请求的URL
         url = f"https://maps.googleapis.com/maps/api/geocode/json?address={city_name}&key={Key}"
 
@@ -119,16 +116,16 @@ def plot_weather_data(start_year, end_year, latitude, longitude):
         plt.close()
         return img_base64
     except Exception as e:
-        logging.error(f"绘制图表时发生错误: {e}")
+        logging.error(f"Failed: {e}")
         return None
 
 @app.route('/')
 def home():
-    return redirect(url_for('temperature_visualize_route'))
+    return redirect(url_for('temperature_visualize'))
 
 # 路由: 获取数据并显示图表
 @app.route('/temperature_visualize', methods=['GET', 'POST'])
-def temperature_visualize_route():
+def temperature_visualize():
     if request.method == 'POST':
         city_name = request.form['city']  # 获取城市名称
         start_year = int(request.form['start_year'])

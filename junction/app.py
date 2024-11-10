@@ -42,16 +42,20 @@ def global_temperature_visualize():
 @app.route('/temperature_visualize', methods=['GET', 'POST'])
 def temperature_visualize():
     if request.method == 'POST':
+        city_name = request.form['city']  # 获取城市名称
         start_year = int(request.form['start_year'])
         end_year = int(request.form['end_year'])
-        latitude = float(request.form['latitude'])
-        longitude = float(request.form['longitude'])
 
-        # 调用绘图功能
-        img = tv_module.plot_weather_data(start_year, end_year, latitude, longitude)
-        if img:
-            # 将生成的图像直接发送到浏览器
-            return send_file(img, mimetype='image/png')
+        # 使用城市名称获取经纬度
+        latitude, longitude = tv_module.get_lat_lng_from_city(city_name)
+        if latitude is None or longitude is None:
+            return "<h1>Error: Could not find the city or its coordinates.</h1>"
+
+        # 调用绘图功能并获取Base64编码图像
+        img_base64 = tv_module.plot_weather_data(start_year, end_year, latitude, longitude)
+        if img_base64:
+            # 将生成的图像嵌入HTML页面
+            return render_template('temperature_visualize.html', img_url=img_base64)
         else:
             return "<h1>Error in generating plot</h1>"
 
