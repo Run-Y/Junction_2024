@@ -9,6 +9,13 @@ This is a web application that visualizes global climate change data, including:
 
 The app provides interactive line charts for each dataset and offers recommendations on how individuals can contribute to addressing climate change.
 
+### Key Features
+
+- **Interactive Charts**: Users can interact with each chart, zooming in, selecting specific timeframes, and comparing different data series.
+- **Real-time Data**: The dashboard is designed to pull in up-to-date information from reliable sources, ensuring that the data reflects current trends in climate change.
+- **Actionable Insights**: The recommendations are not just informational—they are intended to guide users toward meaningful actions to reduce their impact on the planet.
+- **User-Friendly Interface**: The design is intuitive, with easy navigation between different sections of the dashboard, making it accessible to both experts and the general public.
+
 ## Requirements
 
 - Python 3.x
@@ -42,18 +49,6 @@ python app.py
 
 2. Open a web browser and navigate to `http://127.0.0.1:5000` to view the dashboard.
 
-### Directory Structure
-
-```
-/climate-dashboard
-    ├── /static
-        └── back.jpg      # Background image (optional)
-    ├── /templates
-        └── index.html    # Main HTML file
-    ├── app.py            # Flask application
-    ├── requirements.txt  # List of dependencies
-    └── README.md         # This file
-```
 
 ### Accessing the Data
 
@@ -69,4 +64,8 @@ Clicking on each item in the dashboard will open a chart with the relevant data.
 ### Recommendations
 
 There is a button on the dashboard that displays public recommendations for climate action based on the United Nations Sustainable Development Goals (SDG 13: Climate Action).
+
+### Why It Matters
+
+By providing clear, accessible data on climate change and linking it to actionable recommendations, the dashboard aims to inform, educate, and inspire action. It empowers users to understand the urgency of addressing climate change and gives them concrete steps they can take to contribute to global sustainability efforts. Whether you’re a policymaker, a business leader, or an individual, this tool provides the information needed to make informed decisions and drive positive change in the fight against climate change.
 
