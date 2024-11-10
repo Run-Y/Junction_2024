@@ -91,5 +91,12 @@
         <!-- 嵌入 Plotly 图表 -->
         {{ graph_html | safe }}
     </div>
+
+    <div class="button-container">
+    <a href="{{ url_for('temperature_visualize') }}">
+        <button type="button">Temperature Change in Your City</button>
+    </a>
+    </div>
+
 </body>
 </html>
