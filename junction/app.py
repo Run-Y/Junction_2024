@@ -4,6 +4,7 @@ import sea_level_visulize as slv_module
 import temperature_visualize as tv_module  # 导入 Temperature_Visualize.py 中的功能
 import ice_sheets_visualize as isv_module
 import carbon_dioxide_visualize as cdv_module
+import global_temperature_visualize as gtv_module
 
 app = Flask(__name__)
 
@@ -12,6 +13,29 @@ app = Flask(__name__)
 @app.route('/')
 def index():
     return render_template('index.html')
+
+
+@app.route('/global_temperature_visualize', methods=['GET', 'POST'])
+def global_temperature_visualize():
+    if request.method == 'POST':
+        # 获取用户输入的年份范围
+        start_year = request.form.get('start_year', type=int)
+        end_year = request.form.get('end_year', type=int)
+
+        # 校验年份范围
+        if start_year < 1880 or end_year > 2023:
+            return "<h1>Please enter a valid year between 1880 and 2023.</h1>"
+
+        if start_year and end_year:
+            # 生成图表
+            figure = gtv_module.create_plot(start_year, end_year)
+            graph_html = figure.to_html(full_html=False)
+            return render_template('global_temperature_visualize.html', graph_html=graph_html)
+        else:
+            return "<h1>Please enter a valid year.</h1>"
+
+    # GET 请求时显示表单页面
+    return render_template('global_temperature_visualize.html')
 
 
 # 路由: 温度可视化

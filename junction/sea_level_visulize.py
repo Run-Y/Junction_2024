@@ -20,7 +20,7 @@ def create_plot(start_year, end_year):
         x=filtered_data['year_fraction'],
         y=filtered_data['GMSL_GIA_applied'],  # 使用加上 37.9 后的值
         mode='lines+markers',
-        name='',
+        name='Global Mean Sea Level',
         hovertemplate='Year: %{x}<br>GMSL: %{y} mm<br>',
     )
 

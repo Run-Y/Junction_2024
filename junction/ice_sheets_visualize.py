@@ -30,7 +30,7 @@ def create_plot(start_year, end_year, file_name):
         x=filtered_data['TIME (year.decimal)'],  # 横坐标为 Time
         y=filtered_data[mass_column],  # 纵坐标为对应的 Mass
         mode='lines+markers',
-        name='',
+        name=title,
         hovertemplate='Time: %{x}<br>' +
                       f'{title}' + '%{y}(Gigatonnes)' + f' (±{filtered_data[uncertainty_column].iloc[0]})' # 显示不确定性
     )

@@ -18,7 +18,7 @@ def create_plot(start_year, end_year):
         x=filtered_data['year'],
         y=filtered_data['de-seasonalized'],
         mode='lines+markers',
-        name='',
+        name='Monthly Average',
         hovertemplate='Year: %{x}<br>Monthly average(de-seasonalized): %{y} parts per million<br>',
     )
 
