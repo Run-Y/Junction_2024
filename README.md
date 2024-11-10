@@ -32,22 +32,6 @@ Flask
 matplotlib
 ```
 
-### Setting Up the Background Image
-
-1. Download a background image you would like to use for the web page.
-2. Place the image in the same directory as your `index.html` file, or alternatively, place it in a folder called `static` (if using Flask's static folder functionality).
-3. Update the CSS `background-image` URL in the `index.html` to point to the image, for example:
-
-```css
-background-image: url('back.jpg');  /* If the image is in the same directory */
-```
-
-Or:
-
-```css
-background-image: url('/static/back.jpg');  /* If the image is inside a "static" folder */
-```
-
 ### Running the Application
 
 1. In the terminal, navigate to the project directory and run the Flask app:
@@ -59,8 +43,6 @@ python app.py
 2. Open a web browser and navigate to `http://127.0.0.1:5000` to view the dashboard.
 
 ### Directory Structure
-
-Here’s a suggested directory structure for your project:
 
 ```
 /climate-dashboard
@@ -82,7 +64,7 @@ The dashboard will display the following data on interactive line charts:
 - **Sea Level Rise**
 - **Glacier Ice Mass Loss**
 
-Clicking on each item in the dashboard will open a line chart with the relevant data.
+Clicking on each item in the dashboard will open a chart with the relevant data.
 
 ### Recommendations
 
