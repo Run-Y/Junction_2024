@@ -2,10 +2,10 @@
 
 This is a web application that visualizes global climate change data, including:
 
-- Global temperature change
-- CO2 emissions
-- Sea level rise
-- Glacier ice mass loss
+- Global Temperature Change
+- CO₂ Emissions
+- Sea Level Change
+- Glacier Ice Mass Loss
 
 The app provides interactive line charts for each dataset and offers recommendations on how individuals can contribute to addressing climate change.
 
@@ -37,6 +37,8 @@ Where `requirements.txt` should contain the following:
 ```
 Flask
 matplotlib
+pandas
+plotly
 ```
 
 ### Running the Application
@@ -55,8 +57,8 @@ python app.py
 The dashboard will display the following data on interactive line charts:
 
 - **Global Temperature Change**
-- **CO2 Emissions**
-- **Sea Level Rise**
+- **CO₂ Emissionss**
+- **Sea Level Change**
 - **Glacier Ice Mass Loss**
 
 Clicking on each item in the dashboard will open a chart with the relevant data.
