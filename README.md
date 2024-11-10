@@ -71,3 +71,8 @@ There is a button on the dashboard that displays public recommendations for clim
 
 By providing clear, accessible data on climate change and linking it to actionable recommendations, the dashboard aims to inform, educate, and inspire action. It empowers users to understand the urgency of addressing climate change and gives them concrete steps they can take to contribute to global sustainability efforts. Whether you’re a policymaker, a business leader, or an individual, this tool provides the information needed to make informed decisions and drive positive change in the fight against climate change.
 
+### Data Source
+The data used in this project is sourced from the [NASA Climate Change Science website](https://science.nasa.gov/climate-change/). NASA's Climate Change Science site provides authoritative data and scientific analyses on climate change, available for reference by researchers and the public worldwide.
+
+### About NASA's Climate Change Science Website
+NASA's Climate Change Science website showcases the latest research and observational data related to climate change. It covers global temperature trends, carbon dioxide levels, sea level rise, polar ice changes, and more, aiming to deliver accurate, science-based climate data.
