@@ -6,20 +6,23 @@ import matplotlib.pyplot as plt
 from datetime import datetime
 import numpy as np
 import io
-import logging
-
-app = Flask(__name__)
-
+from dotenv import load_dotenv
+import os
 # 获取城市经纬度的函数
 # 调用 Nominatim API 获取城市的经纬度
 import requests
 import logging
 
+app = Flask(__name__)
+# 加载 .env 文件
+load_dotenv()
+
+# 获取 API 密钥
+Key = os.getenv('Key')
 
 def get_lat_lng_from_city(city_name):
     try:
         # 使用你的 Google API 密钥
-        Key = "AIzaSyBXO0ZpOUkaZgotj3UxCkK3E7xbBDZD9Hw"
         # 构建API请求的URL
         url = f"https://maps.googleapis.com/maps/api/geocode/json?address={city_name}&key={Key}"
 
